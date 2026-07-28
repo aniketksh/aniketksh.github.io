@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aniket Kshirsagar — Senior Site Reliability Engineer</title>
-<meta name="description" content="Aniket Kshirsagar — Senior Site Reliability Engineer & Cloud/DevOps consultant. 8+ years designing, automating and scaling cloud-native platforms on AWS and Azure.">
+<meta name="description" content="Aniket Kshirsagar — Senior Site Reliability Engineer & Cloud/DevOps consultant. 8+ years designing, automating and scaling cloud-native platforms, available for full-time and freelance work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,12 +22,27 @@
     --accent-soft:#e2f4f0;
     --accent2:#e0812f;
     --accent2-soft:#fbe9d9;
+    --panel-dark:#12161d;
     --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
     --display:'Space Grotesk',var(--sans);
     --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
     --radius-lg:22px;
     --radius:12px;
     --maxw:1180px;
+  }
+  html[data-theme="dark"]{
+    --bg:#0e1218;
+    --bg-alt:#161b22;
+    --surface:#141920;
+    --ink:#eef1f6;
+    --ink-muted:#9aa3b2;
+    --ink-dim:#6b7684;
+    --border:#242a33;
+    --accent:#14c9ab;
+    --accent-deep:#5eead4;
+    --accent-soft:rgba(20,201,171,0.14);
+    --accent2:#f0964a;
+    --accent2-soft:rgba(240,150,74,0.14);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -38,6 +53,7 @@
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background .2s ease, color .2s ease;
   }
   a{color:inherit;}
   ::selection{background:var(--accent-soft); color:var(--accent-deep);}
@@ -46,15 +62,26 @@
   img{max-width:100%; display:block;}
 
   /* ---------- NAV ---------- */
-  header.nav{position:sticky; top:0; z-index:50; background:rgba(250,249,246,0.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--border);}
-  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:76px;}
-  .logo{font-family:var(--display); font-weight:700; font-size:18px; text-decoration:none; letter-spacing:-0.01em;}
-  nav.links{display:flex; gap:36px; font-size:14.5px; font-weight:500;}
-  nav.links a{text-decoration:none; color:var(--ink-muted); transition:color .15s ease;}
+  header.nav{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); transition:background .2s ease, border-color .2s ease;}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:76px; gap:20px;}
+  .logo{font-family:var(--display); font-weight:700; font-size:17px; text-decoration:none; letter-spacing:-0.01em; white-space:nowrap;}
+  nav.links{display:flex; gap:32px; font-size:14.5px; font-weight:500;}
+  nav.links a{text-decoration:none; color:var(--ink-muted); transition:color .15s ease; white-space:nowrap;}
   nav.links a:hover{color:var(--ink);}
+  .nav-actions{display:flex; align-items:center; gap:12px; flex-shrink:0;}
   .nav-cta{font-size:14px; font-weight:600; text-decoration:none; color:#fff; background:var(--ink); padding:11px 22px; border-radius:100px; transition:background .15s ease, transform .15s ease; white-space:nowrap;}
+  html[data-theme="dark"] .nav-cta{color:var(--panel-dark);}
   .nav-cta:hover{background:var(--accent-deep); transform:translateY(-1px);}
-  .menu-toggle{display:none; background:none; border:1px solid var(--border); border-radius:8px; width:40px; height:40px; cursor:pointer; font-size:16px;}
+  .theme-toggle{
+    width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:var(--surface);
+    cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .theme-toggle:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .theme-toggle .icon-moon{display:none;}
+  html[data-theme="dark"] .theme-toggle .icon-sun{display:none;}
+  html[data-theme="dark"] .theme-toggle .icon-moon{display:inline;}
+  .menu-toggle{display:none; background:none; border:1px solid var(--border); border-radius:8px; width:40px; height:40px; cursor:pointer; font-size:16px; color:var(--ink);}
 
   /* ---------- HERO ---------- */
   section.hero{padding:76px 0 88px;}
@@ -68,10 +95,12 @@
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,168,148,0.5);} 70%{box-shadow:0 0 0 7px rgba(14,168,148,0);} 100%{box-shadow:0 0 0 0 rgba(14,168,148,0);}}
   h1.headline{font-family:var(--display); font-weight:700; font-size:clamp(34px,4.6vw,54px); line-height:1.08; letter-spacing:-0.02em; margin:0 0 22px;}
   h1.headline em{font-style:normal; color:var(--accent-deep);}
-  p.subhead{font-size:18px; color:var(--ink-muted); max-width:520px; margin:0 0 34px;}
+  p.subhead{font-size:18px; color:var(--ink-muted); max-width:540px; margin:0 0 20px;}
+  p.subhead2{font-size:15px; color:var(--ink-muted); max-width:540px; margin:0 0 34px;}
+  p.subhead2 strong{color:var(--ink); font-weight:600;}
   .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
   .btn{font-size:14.5px; font-weight:600; text-decoration:none; padding:13px 24px; border-radius:100px; display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, filter .15s ease, background .15s ease;}
-  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary{background:var(--ink); color:var(--bg);}
   .btn-primary:hover{background:var(--accent-deep); transform:translateY(-2px);}
   .btn-ghost{border:1px solid var(--border); color:var(--ink); background:var(--surface);}
   .btn-ghost:hover{border-color:var(--ink); transform:translateY(-2px);}
@@ -148,6 +177,20 @@
   .exp-bullets{margin:0; padding-left:18px; color:var(--ink-muted); font-size:14.5px;}
   .exp-bullets li{margin-bottom:6px;}
 
+  /* ---------- FREELANCE PROJECTS ---------- */
+  .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  .project-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px 26px 24px; display:flex; flex-direction:column; transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;}
+  .project-card:hover{border-color:var(--accent); transform:translateY(-3px); box-shadow:0 16px 30px -18px rgba(20,24,31,0.25);}
+  .project-top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px;}
+  .project-card h3{font-family:var(--display); font-size:18px; font-weight:600; margin:0;}
+  .project-cat{font-family:var(--mono); font-size:10.5px; color:var(--accent-deep); background:var(--accent-soft); padding:4px 9px; border-radius:100px; white-space:nowrap; flex-shrink:0;}
+  .project-role{font-family:var(--mono); font-size:12px; color:var(--ink-dim); margin-bottom:14px;}
+  .project-bullets{margin:0 0 16px; padding-left:18px; color:var(--ink-muted); font-size:14px; flex-grow:1;}
+  .project-bullets li{margin-bottom:5px;}
+  .project-link{font-size:13px; font-weight:600; text-decoration:none; color:var(--accent-deep); display:inline-flex; align-items:center; gap:6px; width:fit-content;}
+  .project-link:hover{color:var(--ink);}
+  .project-noclient{font-family:var(--mono); font-size:12px; color:var(--ink-dim);}
+
   /* ---------- SERVICES ---------- */
   .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
   .service-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px 24px; transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;}
@@ -163,7 +206,7 @@
   .edu-strip .e-date{font-family:var(--mono); font-size:12px; color:var(--ink-dim);}
 
   /* ---------- CONTACT ---------- */
-  .contact-panel{display:grid; grid-template-columns:1.2fr 1fr; background:var(--ink); color:#fff; border-radius:var(--radius-lg); overflow:hidden;}
+  .contact-panel{display:grid; grid-template-columns:1.2fr 1fr; background:var(--panel-dark); color:#fff; border-radius:var(--radius-lg); overflow:hidden;}
   .contact-left{padding:56px 48px;}
   .contact-left .eyebrow{color:var(--accent);}
   .contact-left .eyebrow::before{background:var(--accent);}
@@ -190,6 +233,7 @@
     .about-grid{grid-template-columns:1fr; gap:36px;}
     .stack-grid{grid-template-columns:1fr 1fr;}
     .services-grid{grid-template-columns:1fr 1fr;}
+    .projects-grid{grid-template-columns:1fr;}
     .contact-panel{grid-template-columns:1fr;}
     nav.links{position:fixed; inset:76px 0 auto 0; background:var(--bg); flex-direction:column; padding:10px 32px 20px; border-bottom:1px solid var(--border); transform:translateY(-120%); transition:transform .2s ease;}
     nav.links.open{transform:translateY(0);}
@@ -206,6 +250,7 @@
     .trust-inner{flex-direction:column; align-items:flex-start; gap:18px;}
     .float-chip{left:8px;}
     .float-chip-top{right:8px;}
+    .nav-cta{padding:10px 16px;}
   }
 </style>
 </head>
@@ -213,15 +258,19 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="logo">Aniket K.</a>
+    <a href="#top" class="logo">Aniket Kshirsagar</a>
     <nav class="links" id="navLinks">
       <a href="#about">About</a>
       <a href="#stack">Stack</a>
       <a href="#experience">Experience</a>
+      <a href="#projects">Freelance Work</a>
       <a href="#services">Services</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div style="display:flex; align-items:center; gap:12px;">
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="icon-sun">☀</span><span class="icon-moon">☾</span>
+      </button>
       <a class="nav-cta" href="mailto:aniketksh167@gmail.com">Start a project</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     </div>
@@ -232,9 +281,10 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow-pill"><span class="pulse"></span>OPEN FOR NEW ENGAGEMENTS</div>
+        <div class="eyebrow-pill"><span class="pulse"></span>AVAILABLE FOR FULL-TIME &amp; FREELANCE WORK</div>
         <h1 class="headline">I build cloud platforms teams can <em>trust</em> with production.</h1>
-        <p class="subhead">Senior Site Reliability Engineer &amp; Cloud/DevOps consultant with 8+ years designing, automating and scaling infrastructure on AWS and Azure — from Terraform builds to CI/CD, observability and 24/7 incident response.</p>
+        <p class="subhead">Senior Site Reliability Engineer &amp; Cloud/DevOps consultant with 8+ years designing, automating and scaling infrastructure on AWS and Azure.</p>
+        <p class="subhead2">I also take on <strong>freelance engagements</strong> — from cloud infrastructure and DevOps to brand identity, web design and digital marketing for small businesses.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="mailto:aniketksh167@gmail.com">Start a project →</a>
           <a class="btn btn-ghost" href="Aniket_Kshirsagar_Resume.pdf" target="_blank" rel="noopener">Download résumé</a>
@@ -243,7 +293,7 @@
           <div class="hstat"><div class="n">8+</div><div class="l">Years experience</div></div>
           <div class="hstat"><div class="n">50%</div><div class="l">Cloud cost cut</div></div>
           <div class="hstat"><div class="n">30+</div><div class="l">Apps onboarded</div></div>
-          <div class="hstat"><div class="n">20+</div><div class="l">K8s migrations</div></div>
+          <div class="hstat"><div class="n">5+</div><div class="l">Freelance clients</div></div>
         </div>
       </div>
 
@@ -285,7 +335,7 @@
         <div class="about-text">
           <p>I'm Aniket — a Senior Site Reliability Engineer based in Pune, India, working with organizations across cosmetics, HR-tech, automotive and enterprise software. Over 8+ years I've led SRE and DevOps transformations for teams that can't afford downtime.</p>
           <p>My work sits at the intersection of infrastructure and process: designing cloud architecture with Terraform, building CI/CD pipelines that ship safely, wiring up observability so incidents get caught before customers notice, and leading teams through it all.</p>
-          <p>I take on consulting engagements, fixed-scope builds and fractional SRE/DevOps support — bringing enterprise-grade practices to teams of any size.</p>
+          <p>Alongside full-time work, I take on freelance and consulting engagements — cloud and DevOps builds for startups, and full brand-to-website packages for small businesses.</p>
         </div>
         <div class="principles">
           <div class="principle">
@@ -323,7 +373,7 @@
           </div>
         </div>
         <div class="stack-card">
-          <div class="cat">Delivery &amp; IaC</div>
+          <div class="cat">Delivery, IaC &amp; security</div>
           <div class="tag-row">
             <span class="tag">Terraform</span>
             <span class="tag">Kubernetes</span>
@@ -333,6 +383,7 @@
             <span class="tag">GitHub Actions</span>
             <span class="tag">Spinnaker</span>
             <span class="tag">Ansible</span>
+            <span class="tag">IAM / Security hardening</span>
           </div>
         </div>
         <div class="stack-card">
@@ -347,12 +398,50 @@
           </div>
         </div>
         <div class="stack-card">
-          <div class="cat">Languages</div>
+          <div class="cat">Languages &amp; web</div>
           <div class="tag-row">
             <span class="tag">Java</span>
             <span class="tag">Python</span>
             <span class="tag">C++</span>
             <span class="tag">Shell</span>
+            <span class="tag">HTML/CSS/JS</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="cat">Web platforms &amp; commerce</div>
+          <div class="tag-row">
+            <span class="tag">WordPress</span>
+            <span class="tag">Shopify / E-com</span>
+            <span class="tag">Payment gateways</span>
+            <span class="tag">Google Workspace</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="cat">Design &amp; marketing</div>
+          <div class="tag-row">
+            <span class="tag">Brand identity</span>
+            <span class="tag">Figma</span>
+            <span class="tag">SEO</span>
+            <span class="tag">Social media mgmt</span>
+            <span class="tag">Paid ads</span>
+            <span class="tag">Product photography</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="cat">AI &amp; automation</div>
+          <div class="tag-row">
+            <span class="tag">LLM-assisted workflows</span>
+            <span class="tag">Process automation</span>
+            <span class="tag">API integrations</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="cat">Collaboration</div>
+          <div class="tag-row">
+            <span class="tag">JIRA</span>
+            <span class="tag">Confluence</span>
+            <span class="tag">Artifactory</span>
+            <span class="tag">Agile delivery</span>
           </div>
         </div>
       </div>
@@ -445,41 +534,137 @@
     </div>
   </section>
 
+  <section id="projects" class="reveal">
+    <div class="wrap">
+      <p class="eyebrow">Freelance work</p>
+      <h2 class="h2">Independent client projects</h2>
+      <p class="lede">Outside full-time work, I take on freelance engagements — cloud &amp; DevOps builds, and full brand-to-website packages for small businesses.</p>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-top">
+            <h3>Fundly</h3>
+            <span class="project-cat">Cloud &amp; DevOps</span>
+          </div>
+          <p class="project-role">Freelance DevOps Engineer</p>
+          <ul class="project-bullets">
+            <li>Designed and built the AWS infrastructure from scratch, applying security best practices throughout.</li>
+            <li>Retired legacy and underutilized systems to cut cloud spend.</li>
+            <li>Set up log and system monitoring, plus a CI/CD pipeline to streamline the dev team's daily workflow.</li>
+          </ul>
+          <span class="project-noclient">Internal infrastructure — no public link</span>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <h3>Raw Wood Interiors</h3>
+            <span class="project-cat">Brand &amp; Web</span>
+          </div>
+          <p class="project-role">Freelance Designer &amp; Developer</p>
+          <ul class="project-bullets">
+            <li>Designed the client's logo.</li>
+            <li>Built a single-page portfolio website to showcase their interior design work.</li>
+          </ul>
+          <a class="project-link" href="https://rawwoodinteriors.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <h3>Jatayu Interiors</h3>
+            <span class="project-cat">Brand &amp; Web</span>
+          </div>
+          <p class="project-role">Freelance Designer &amp; Developer</p>
+          <ul class="project-bullets">
+            <li>Designed the logo, visiting cards and letterhead, and configured Google Workspace for the organization.</li>
+            <li>Built a multi-page interactive website showcasing portfolio, services and contact details, with a configured blog space.</li>
+          </ul>
+          <a class="project-link" href="https://www.jatayuinteriors.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <h3>Blaze Tech Enterprises</h3>
+            <span class="project-cat">Web &amp; Marketing</span>
+          </div>
+          <p class="project-role">Freelance Designer, Developer &amp; Marketer</p>
+          <ul class="project-bullets">
+            <li>Designed logo, visiting cards, letterhead and configured Google Workspace; built a multi-page site with a blog.</li>
+            <li>Configured SEO, and created &amp; managed social media accounts, product imagery and paid ads to grow reach.</li>
+          </ul>
+          <a class="project-link" href="https://www.blazetechenterprises.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <h3>Craftify by Blaze</h3>
+            <span class="project-cat">E-commerce &amp; Marketing</span>
+          </div>
+          <p class="project-role">Freelance Designer, Developer &amp; Marketer</p>
+          <ul class="project-bullets">
+            <li>Designed the logo and built the e-commerce website, integrating a payment gateway to accept customer payments.</li>
+            <li>Configured SEO, managed social media and product photography, and ran ads to reach target customers.</li>
+          </ul>
+          <a class="project-link" href="https://www.craftifybyblaze.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="services" class="reveal">
     <div class="wrap">
       <p class="eyebrow">How I can help</p>
       <h2 class="h2">Services for teams that can't afford downtime</h2>
-      <p class="lede">Engagements range from a focused audit to full ownership of your platform.</p>
+      <p class="lede">Engagements range from a focused audit to full ownership of your platform — or your brand.</p>
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">☁</div>
-          <h3>Cloud infrastructure &amp; migration</h3>
-          <p>AWS/Azure architecture design, and migrating legacy workloads onto resilient, right-sized cloud infrastructure.</p>
+          <h3>Cloud Infrastructure &amp; Migration</h3>
+          <p>AWS/Azure architecture design and migrating legacy workloads onto resilient, right-sized cloud infrastructure.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">⎈</div>
-          <h3>Kubernetes &amp; containers</h3>
-          <p>Standing up EKS/AKS clusters, containerizing applications, and moving workloads off VMs onto Kubernetes.</p>
+          <div class="service-icon">▽</div>
+          <h3>Cost Optimization</h3>
+          <p>Architecture reviews and right-sizing that cut cloud spend sustainably — delivered a 50% reduction in past engagements.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⛨</div>
+          <h3>DevSecOps &amp; Security</h3>
+          <p>Security best practices baked into infrastructure and pipelines — least-privilege access, hardening and audits.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">⇄</div>
-          <h3>CI/CD pipeline automation</h3>
+          <h3>CI/CD &amp; Release Engineering</h3>
           <p>Config-as-code delivery pipelines with Jenkins, GitHub Actions or Spinnaker, built for fast, safe releases.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">◎</div>
-          <h3>Observability &amp; incident response</h3>
-          <p>Monitoring, synthetic tests and alerting with Datadog, Prometheus and Grafana, plus on-call and incident-workflow design.</p>
+          <h3>Site Reliability Engineering</h3>
+          <p>On-call design, SLOs, capacity planning and incident-response processes for teams that can't afford downtime.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">▤</div>
-          <h3>Infrastructure as code</h3>
-          <p>Terraform modules and reusable infra patterns so environments are reproducible, versioned and auditable.</p>
+          <div class="service-icon">✦</div>
+          <h3>AI Solutions</h3>
+          <p>Integrating AI-assisted tools and automation into workflows, pipelines and products to save your team time.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">▽</div>
-          <h3>Cost optimization</h3>
-          <p>Architecture reviews that trim cloud spend — delivered a 50% reduction across production workloads previously.</p>
+          <div class="service-icon">{ }</div>
+          <h3>Software Development</h3>
+          <p>Custom application development in Java, Python and C++, from backend services to internal tooling.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">◫</div>
+          <h3>Web Development</h3>
+          <p>Portfolio sites, multi-page business websites and e-commerce builds — from design through to launch.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">◑</div>
+          <h3>Observability &amp; Incident Response</h3>
+          <p>Monitoring, synthetic tests and alerting with Datadog, Prometheus and Grafana, plus on-call runbook design.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">↗</div>
+          <h3>Digital Marketing</h3>
+          <p>SEO, social media management, product photography and paid ad campaigns to grow reach for small businesses.</p>
         </div>
       </div>
     </div>
@@ -502,8 +687,8 @@
       <div class="contact-panel">
         <div class="contact-left">
           <p class="eyebrow">Get in touch</p>
-          <h2 class="h2">Let's talk about your platform.</h2>
-          <p>Available for consulting engagements, fixed-scope projects, and fractional SRE/DevOps support. Usually replies within a day.</p>
+          <h2 class="h2">Let's talk about your platform — or your project.</h2>
+          <p>Available for full-time roles, consulting engagements, fixed-scope projects, and freelance work. Usually replies within a day.</p>
           <a class="btn btn-primary" href="mailto:aniketksh167@gmail.com">Email me →</a>
         </div>
         <div class="contact-right">
@@ -535,6 +720,16 @@
     links.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
   }));
+
+  /* Theme toggle — in-memory only, defaults to system preference */
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  root.setAttribute('data-theme', currentTheme);
+  themeToggle.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', currentTheme);
+  });
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReduced && 'IntersectionObserver' in window) {
